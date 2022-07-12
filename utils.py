@@ -23,7 +23,20 @@ def get_all() -> list[dict]:
     # покажет всех кандидатов
     return load_candidates()
 
-# функция, которая вернет кандидата по pk
 
+# вернет кандидата по pk
+def get_by_pk(uid: int) -> dict | None:
+    candidates = get_all()
+    for candidate in candidates:
+        if candidate['pk'] == uid:
+            return candidate
+    return None
 
-# функция, которая вернет кандидатов по навыку
+# вернет кандидатов по навыку
+def get_by_skill(skill: str) -> list[dict]:
+    candidates = get_all()
+    result = []
+    for candidate in candidates:
+        if skill in candidate['skills'].lower().split(', '):
+            result.append(candidate)
+    return result
